@@ -53,3 +53,8 @@
     height:50%
     
 }
+
+.filter-btn{
+    margin:10px;
+    cursor:pointer
+}

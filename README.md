@@ -40,4 +40,36 @@
 //Afunction which is returning a piece of jsx is called functional component
 
 
+/*
+*Header
+*  -logo
+*  -nav-items
+*Body
+*  -Search
+*  -RestaurantContainer
+*     -RestaurantCard
+*        -Img
+*        -Name of Rest,Star Rating,cuisines,delivery time
+*Footer
+*  -Copyright
+*  -Links
+*  -Adress
+*  -Contact
+
+*/
+
+Two types of export and import
+-Default export/import
+export default nameofvariable
+import nameofvariable from path
+-Named export/import
+-export const component;
+-import {component} from path
+
+//React Hooks
+-These are noraml JS utility functions
+-Two important react hooks:
+  1.useState() -Super powerful State Variables in react
+  2.useEffect()
+
 
