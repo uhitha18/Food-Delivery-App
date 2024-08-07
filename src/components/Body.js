@@ -9,6 +9,11 @@ const Body = () => {
 //State Variable - Super powerful variable 
 
 const [listOfRestaurants,setListOfRestuarants]=useState([]);
+const [filteredRestaurants,setfilteredRestuarants]=useState([])
+const [searchText,setsearchText]=useState("");
+//Whenever state variables update ,react triggerd a reconciliation cycle(re renders the component)
+
+console.log("Body rendered")
 
 useEffect(()=>{
   fetchData();
@@ -22,17 +27,31 @@ const fetchData=async () =>{
 const json=await data.json();
 console.log(json);
 setListOfRestuarants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+
+setfilteredRestuarants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+
 }
 
-if(listOfRestaurants.length===0){
-  return <Shimmer/>
-}
+//conditional rendering
 
-console.log("Body rendered")
 
-    return (
+
+    return listOfRestaurants.length===0 ? <Shimmer/>:(
       <div className="body">
         <div className="filter">
+          <div className="search">
+            <input type="text" className="search-box" value={searchText} onChange={(e)=>{
+              setsearchText(e.target.value);
+            }}/>
+            <button onClick={()=>{
+              console.log(searchText);
+              const normalizedSearchText = searchText.toLowerCase();
+            const filteredList1=listOfRestaurants.filter((res)=> res.info.name.toLowerCase().includes(normalizedSearchText))
+             setfilteredRestuarants(filteredList1)
+
+                
+            }}>Search</button>
+          </div>
           <button className="filter-btn" onClick={() =>{
             
             const filteredList=listOfRestaurants.filter((res) => res.info.avgRating>4);
@@ -40,11 +59,13 @@ console.log("Body rendered")
               setListOfRestuarants(filteredList)
            
           }}
+
+
           >
              Top Rated Restaurants</button>
         </div>
         <div className="restro-container">
-          {listOfRestaurants.map((restuarant) => (
+          {filteredRestaurants.map((restuarant) => (
             <RestaurantCard key={restuarant.info.id} resData={restuarant} />
           ))}
         </div>
