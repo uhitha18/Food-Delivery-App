@@ -72,4 +72,7 @@ import nameofvariable from path
   1.useState() -Super powerful State Variables in react
   2.useEffect()
 
+// 2types Routing in webapps
+-Client side Routing
+-Server Side Routing
 
